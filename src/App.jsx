@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SongForm from './components/SongForm';
-import SongList from './components/SongList';
+import SongForm from './Components/SongForm';
+import SongList from './Components/SongList';
 
 function App() {
   const [songs, setSongs] = useState([]);
