@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import SongForm from './Components/SongForm';
 import SongList from './Components/SongList';
+import SearchBar from './Components/Searchbar';
 
 function App() {
   const [songs, setSongs] = useState([]);
   const [sortBy, setSortBy] = useState('title');
 
   const addSong = (song) => {
-    setSongs([...songs, song]);
+    // prevent duplicates
+    setSongs(prev => prev.some(s => s.id === song.id) ? prev : [...prev, song]);
   };
 
   const removeSong = (id) => {
@@ -19,9 +21,9 @@ function App() {
   );
 
   return (
-    <div style={{ padding: '1rem' }}>
+    <div className="App">
       <h1>🎵 My Playlist</h1>
-      <SongForm onAddSong={addSong} />
+      <SearchBar onAddSong={addSong} />
       <div style={{ marginTop: '1rem' }}>
         <label>Sort by: </label>
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
@@ -33,5 +35,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
