@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 
-function SongForm({ onAddSong }) {
+const SongForm = ({ onAddSong }) => {
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title && artist) {
-      onAddSong({ id: Date.now().toString(), title, artist });
-      setTitle('');
-      setArtist('');
-    }
+    if (!title || !artist) return;
+    onAddSong({ title, artist });
+    setTitle('');
+    setArtist('');
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
+    <form onSubmit={handleSubmit}>
+      <h3>Add a Song Manually</h3>
       <input
         type="text"
-        placeholder="Song Title"
+        placeholder="Song title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
@@ -30,6 +30,6 @@ function SongForm({ onAddSong }) {
       <button type="submit">Add</button>
     </form>
   );
-}
+};
 
 export default SongForm;
